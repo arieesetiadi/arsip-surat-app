@@ -1,0 +1,6 @@
+.bg-shape{
+    background-image: url('/assets/images/shapes/white-bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    object-fit: cover;
+}
