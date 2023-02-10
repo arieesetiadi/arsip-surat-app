@@ -4,3 +4,7 @@
     background-position: center;
     object-fit: cover;
 }
+
+.rounded-lg{
+    border-radius: 10px;
+}

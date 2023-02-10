@@ -24,10 +24,16 @@ class AuthController extends Controller
 
         // Cek hasil proses login
         if(!$result){
-            return back()->with('alert', 'Username atau password tidak valid');
+            return back()->with('alert', 'Username atau password anda tidak valid.');
         }
 
         // Redirect ke halaman dashboard
         return redirect()->route('dashboard');
+    }
+
+    // Fungsi logout
+    public function logout(){
+        auth()->logout();
+        return redirect()->route('viewLogin');
     }
 }

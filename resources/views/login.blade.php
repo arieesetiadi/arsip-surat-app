@@ -33,33 +33,35 @@
         <main class="authentication-content">
             <div class="container-fluid">
                 <div class="authentication-card">
-                    <div class="card shadow rounded overflow-hidden">
+                    <div class="card shadow rounded-lg overflow-hidden">
                         <div class="row g-0">
                             <div class="col-lg-6 d-flex align-items-center justify-content-center">
                                 <img src="{{ asset('assets/images/logos/bumdes.png') }}"
                                      class="img-fluid"
-                                     alt="Login image" width="300px">
+                                     alt="Login image"
+                                     width="300px">
                             </div>
                             <div class="col-lg-6">
                                 <div class="card-body p-4 p-sm-5">
-                                    <h5 class="card-title">Login</h5>
-                                    <p class="card-text">BUMDESA Sari Amreta Sudha Desa Sidakarya</p>
-
+                                    <h5 class="card-title">| Login</h5>
                                     {{-- Tampilkan jika ada alert --}}
                                     @if (session('alert'))
-                                        <div class="alert alert-danger"
-                                             role="alert">
-                                            {{ session('alert') }}
-                                        </div>
+                                        <p class="card-text">
+                                            <span class="text-danger">
+                                                <i class="bi bi-exclamation-circle"></i>
+                                                {{ session('alert') }}
+                                            </span>
+                                        </p>
                                     @endif
 
                                     <form action="{{ route('doLogin') }}"
                                           method="POST"
                                           class="form-body">
                                         @csrf
-                                        <div class="login-separater text-center mb-4"> <span>Login Disini</span>
+                                        <div class="login-separater text-center mb-4"> <span>Login</span>
                                             <hr>
                                         </div>
+
                                         <div class="row g-3">
                                             {{-- Input username --}}
                                             <div class="col-12">

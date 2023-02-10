@@ -6,7 +6,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // Halaman dashboard
     public function index(){
-        dd('DASHBOARD');
+        $viewData = [
+            'headTitle' => 'Dashboard'
+        ];
+
+        return view('pages.dashboard')->with($viewData);
     }
 }
