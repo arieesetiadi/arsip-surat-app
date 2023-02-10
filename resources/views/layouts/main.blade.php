@@ -1,13 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="en"
+      class="dark-theme">
 
 <head>
-    <!-- Required meta tags -->
+    <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1">
 
-    <!--plugins-->
+    <!-- Plugins -->
     <link href="{{ asset('assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}"
           rel="stylesheet" />
     <link href="{{ asset('assets/plugins/simplebar/css/simplebar.css') }}"
@@ -16,7 +17,8 @@
           rel="stylesheet" />
     <link href="{{ asset('assets/plugins/metismenu/css/metisMenu.min.css') }}"
           rel="stylesheet" />
-    <!-- Bootstrap CSS -->
+
+    <!-- Bootstrap -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}"
           rel="stylesheet" />
     <link href="{{ asset('assets/css/bootstrap-extended.css') }}"
@@ -30,18 +32,10 @@
     <link rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-    <!-- loader-->
-    <link href="{{ asset('assets/css/pace.min.css') }}"
-          rel="stylesheet" />
-
-    <!--Theme Styles-->
+    <!-- Theme Styles -->
     <link href="{{ asset('assets/css/dark-theme.css') }}"
           rel="stylesheet" />
-    <link href="{{ asset('assets/css/light-theme.css') }}"
-          rel="stylesheet" />
     <link href="{{ asset('assets/css/semi-dark.css') }}"
-          rel="stylesheet" />
-    <link href="{{ asset('assets/css/header-colors.css') }}"
           rel="stylesheet" />
 
     {{-- Custom style --}}
@@ -75,7 +69,7 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li>
                                     <a class="dropdown-item"
-                                       href="#">
+                                       href="{{ route('viewProfile') }}">
                                         <div class="d-flex align-items-center">
                                             <img src="{{ asset('assets/images/icons/profile.png') }}"
                                                  alt=""
@@ -83,9 +77,10 @@
                                                  width="54"
                                                  height="54">
                                             <div class="ms-3">
-                                                <h6 class="mb-0 dropdown-user-name">Jhon Deo</h6>
-                                                <small class="mb-0 dropdown-user-designation text-secondary">HR
-                                                    Manager</small>
+                                                <h6 class="mb-0 dropdown-user-name">{{ auth()->user()->name }}</h6>
+                                                <small class="mb-0 dropdown-user-designation text-secondary">
+                                                    {{ auth()->user()->email }}
+                                                </small>
                                             </div>
                                         </div>
                                     </a>
@@ -95,18 +90,18 @@
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                       href="pages-user-profile.html">
+                                       href="{{ route('viewProfile') }}">
                                         <div class="d-flex align-items-center">
-                                            <div class=""><i class="bi bi-person-fill"></i></div>
+                                            <div class=""><i class="bi bi-person"></i></div>
                                             <div class="ms-3"><span>Profile</span></div>
                                         </div>
                                     </a>
                                 </li>
                                 <li>
                                     <a class="dropdown-item"
-                                       href="authentication-signup-with-header-footer.html">
+                                       href="{{ route('doLogout') }}">
                                         <div class="d-flex align-items-center">
-                                            <div class=""><i class="bi bi-lock-fill"></i></div>
+                                            <div class=""><i class="bi bi-lock"></i></div>
                                             <div class="ms-3"><span>Logout</span></div>
                                         </div>
                                     </a>
@@ -123,16 +118,16 @@
         <aside class="sidebar-wrapper"
                data-simplebar="true">
             <div class="sidebar-header">
-                <div>
-                    <img src="{{ asset('assets/images/logos/bumdes.png') }}"
-                         class="logo-icon"
-                         alt="logo icon">
+                <div class="pt-2">
+                    <h5>
+                        <i class="bi bi-house"></i>
+                    </h5>
                 </div>
                 <div>
-                    <h4 class="logo-text text-dark">BUMDes</h4>
+                    <h4 class="logo-text">BUMDes</h4>
                 </div>
                 <div class="toggle-icon ms-auto">
-                    <i class="bi bi-list text-dark"></i>
+                    <i class="bi bi-list"></i>
                 </div>
             </div>
 
@@ -142,7 +137,7 @@
                 <li>
                     <a href="{{ route('dashboard') }}">
                         <div class="parent-icon">
-                            <i class="bi bi-house-fill"></i>
+                            <i class="bi bi-house"></i>
                         </div>
                         <div class="menu-title">Dashboard</div>
                     </a>
@@ -153,7 +148,7 @@
                 <li>
                     <a href="{{ route('dashboard') }}">
                         <div class="parent-icon">
-                            <i class="bi bi-person-fill"></i>
+                            <i class="bi bi-person"></i>
                         </div>
                         <div class="menu-title">Pengguna</div>
                     </a>
@@ -165,72 +160,7 @@
 
         <!-- Main Content-->
         <main class="page-content">
-            <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-4">
-                <div class="col">
-                    <div class="card overflow-hidden radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-stretch justify-content-between overflow-hidden">
-                                <div class="w-50">
-                                    <p>Total Orders</p>
-                                    <h4 class="">8,542</h4>
-                                </div>
-                                <div class="w-50">
-                                    <p class="mb-3 float-end text-success">+ 16% <i class="bi bi-arrow-up"></i></p>
-                                    <div id="chart1"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card overflow-hidden radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-stretch justify-content-between overflow-hidden">
-                                <div class="w-50">
-                                    <p>Total Views</p>
-                                    <h4 class="">12.5M</h4>
-                                </div>
-                                <div class="w-50">
-                                    <p class="mb-3 float-end text-danger">- 3.4% <i class="bi bi-arrow-down"></i></p>
-                                    <div id="chart2"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card overflow-hidden radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-stretch justify-content-between overflow-hidden">
-                                <div class="w-50">
-                                    <p>Revenue</p>
-                                    <h4 class="">$64.5K</h4>
-                                </div>
-                                <div class="w-50">
-                                    <p class="mb-3 float-end text-success">+ 24% <i class="bi bi-arrow-up"></i></p>
-                                    <div id="chart3"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card overflow-hidden radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-stretch justify-content-between overflow-hidden">
-                                <div class="w-50">
-                                    <p>Customers</p>
-                                    <h4 class="">25.8K</h4>
-                                </div>
-                                <div class="w-50">
-                                    <p class="mb-3 float-end text-success">+ 8.2% <i class="bi bi-arrow-up"></i></p>
-                                    <div id="chart4"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @yield('content')
         </main>
         <!-- End Main Content -->
     </div>

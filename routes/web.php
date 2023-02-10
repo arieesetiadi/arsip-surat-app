@@ -18,5 +18,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
     // Route logout
-    Route::get('/logout', [AuthController::class, 'logout'])->name('doLogout');
+    Route::get('/logout', [AuthController::class, 'doLogout'])->name('doLogout');
+
+    // Route Profile
+    Route::get('/profile', [AuthController::class, 'viewProfile'])->name('viewProfile');
 });

@@ -32,8 +32,16 @@ class AuthController extends Controller
     }
 
     // Fungsi logout
-    public function logout(){
+    public function doLogout(){
         auth()->logout();
         return redirect()->route('viewLogin');
+    }
+
+    // Tampilkan halaman profile
+    public function viewProfile(){
+        $viewData = [
+            'headTitle' => 'Profile'
+        ];
+        return view('pages.profile')->with($viewData);
     }
 }
