@@ -15,6 +15,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        User::truncate();
         $users = [
             [
                 'username' => 'admin',
@@ -22,7 +23,7 @@ class UserSeeder extends Seeder
                 'name' => 'Admin Officer',
                 'email' => 'admin@gmail.com',
                 'phone' => '081234567890',
-                'role' => 'admin',
+                'role' => 'Admin Officer',
                 'created_at' => now()
             ],
             [
@@ -31,7 +32,25 @@ class UserSeeder extends Seeder
                 'name' => 'Direktur BUMDes',
                 'email' => 'direktur@gmail.com',
                 'phone' => '081234567890',
-                'role' => 'direktur',
+                'role' => 'Direktur BUMDes',
+                'created_at' => now()
+            ],
+            [
+                'username' => 'admin2',
+                'password' => Hash::make('admin2'),
+                'name' => 'Admin Officer 2',
+                'email' => 'admin2@gmail.com',
+                'phone' => '081234567890',
+                'role' => 'Admin Officer',
+                'created_at' => now()
+            ],
+            [
+                'username' => 'direktur2',
+                'password' => Hash::make('direktur2'),
+                'name' => 'Direktur BUMDes 2',
+                'email' => 'direktur2@gmail.com',
+                'phone' => '081234567890',
+                'role' => 'Direktur BUMDes',
                 'created_at' => now()
             ]
         ];

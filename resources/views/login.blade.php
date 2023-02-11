@@ -54,7 +54,7 @@
                                         </p>
                                     @endif
 
-                                    <form action="{{ route('doLogin') }}"
+                                    <form action="{{ route('authenticate') }}"
                                           method="POST"
                                           class="form-body">
                                         @csrf

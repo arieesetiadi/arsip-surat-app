@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     // Tampilkan halaman login
-    public function viewLogin()
+    public function login()
     {
         return view('login');
     }
 
     // Lakukan proses login
-    public function doLogin(Request $request)
+    public function authenticate(Request $request)
     {
         // Ambil data dari form login
         $loginData = $request->only('username', 'password');
@@ -34,35 +34,8 @@ class AuthController extends Controller
     }
 
     // Fungsi logout
-    public function doLogout(){
+    public function logout(){
         auth()->logout();
-        return redirect()->route('viewLogin');
-    }
-
-    // Tampilkan halaman profile
-    public function viewProfile(){
-        $viewData = [
-            'headTitle' => 'Profile'
-        ];
-        return view('pages.profile')->with($viewData);
-    }
-
-    // Fungsi edit profile
-    public function updateProfile(UpdateRequest $request){
-        $profileData = $request->data();
-        $userId = auth()->user()->id;
-        $updated = User::find($userId)->update($profileData);
-
-        // Munculkan pesan error jika update gagal
-        if(!$updated){
-            $alertData['type'] = 'danger';
-            $alertData['message'] = 'Profile anda gagal dirubah.';
-            return back()->with('alert', $alertData);
-        }
-
-        // Munculkan pesan succes jika update berhasil
-        $alertData['type'] = 'success';
-        $alertData['message'] = 'Profile anda berhasil dirubah.';
-        return back()->with('alert', $alertData);
+        return redirect()->route('login');
     }
 }

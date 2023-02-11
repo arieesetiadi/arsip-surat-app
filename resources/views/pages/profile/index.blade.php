@@ -9,7 +9,7 @@
     <div class="container-fluid">
         <div class="row">
             {{-- Left section --}}
-            <div class="col-sm-12 col-md-6 col-lg-5 p-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-4">
                 <center>
                     <img src="{{ asset('assets/images/icons/profile.png') }}" alt="Profile Picture" width="200"
                         class="img-fluid img-thumbnail rounded-circle my-4">
@@ -25,7 +25,7 @@
             </div>
 
             {{-- Right section --}}
-            <div class="col-sm-12 col-md-6 col-lg-7 p-4">
+            <div class="col-sm-12 col-md-6 col-lg-8 p-4">
                 {{-- Tampilkan pesan sukses --}}
                 @include('components.alert')
 
@@ -35,7 +35,7 @@
                 </h6>
 
                 {{-- Form edit profile --}}
-                <form action="{{ route('updateProfile') }}" method="POST" class="form-body">
+                <form action="{{ route('profile.update') }}" method="POST" class="form-body">
                     @csrf
                     @method('PUT')
                     <div class="row g-3 py-4">
@@ -95,7 +95,7 @@
                                     <i class="bi bi-phone"></i>
                                 </div>
                                 <input name="phone" type="number" class="form-control ps-5" id="phone"
-                                    placeholder="Masukan nama lengkap" autocomplete="off"
+                                    placeholder="Masukan nomor telepon" autocomplete="off"
                                     value="{{ old('phone', auth()->user()->phone) }}" required>
                             </div>
                             @error('phone')
@@ -123,7 +123,10 @@
                         </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Simpan</button>
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-check-circle d-inline-block mx-1"></i>
+                        Simpan
+                    </button>
                 </form>
             </div>
         </div>
