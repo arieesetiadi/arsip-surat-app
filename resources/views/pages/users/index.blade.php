@@ -53,15 +53,16 @@
                                 </a>
 
                                 {{-- Tombol hapus --}}
-                                <form action="{{ route('users.destroy', $user->id) }}" method="POST"
-                                    title="Hapus data {{ $user->name }}" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" class="d-inline-block">
+                                <form id="formUserDelete{{ $user->id }}"
+                                    action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="btn btn-sm" onclick="return confirm('Data dari {{$user->name}} akan dihapus.')">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
                                 </form>
+                                <button type="submit" class="btn btn-sm" title="Hapus data {{ $user->name }}"
+                                    data-bs-toggle="tooltip" data-bs-placement="right"
+                                    onclick="swalConfirm('formUserDelete{{ $user->id }}', 'Data dari {{ $user->name }} akan dihapus.')">
+                                    <i class="bi bi-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     @endforeach
@@ -69,4 +70,25 @@
             </table>
         </div>
     </div>
+
+    @push('afterScripts')
+        <script>
+            function swalConfirm(targetId, message) {
+                const target = document.getElementById(targetId);
+                Swal.fire({
+                    title: 'Konfirmasi',
+                    text: message,
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Lanjutkan'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        target.submit();
+                    }
+                })
+            }
+        </script>
+    @endpush
 @endsection

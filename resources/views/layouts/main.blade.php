@@ -120,16 +120,18 @@
                     </a>
                 </li>
 
-                <li class="menu-label">Data Master</li>
-                {{-- Sidebar | Pengguna --}}
-                <li>
-                    <a href="{{ route('users.index') }}">
-                        <div class="parent-icon">
-                            <i class="bi bi-person"></i>
-                        </div>
-                        <div class="menu-title">Pengguna</div>
-                    </a>
-                </li>
+                @if (auth()->user()->role == 'Admin Officer')
+                    <li class="menu-label">Data Master</li>
+                    {{-- Sidebar | Pengguna --}}
+                    <li>
+                        <a href="{{ route('users.index') }}">
+                            <div class="parent-icon">
+                                <i class="bi bi-person"></i>
+                            </div>
+                            <div class="menu-title">Pengguna</div>
+                        </a>
+                    </li>
+                @endif
             </ul>
             <!--end navigation-->
         </aside>
@@ -156,8 +158,12 @@
 
     <!--app-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
-    <script src="{{ asset('assets/js/index2.js') }}"></script>
-    <script src="{{ asset('assets/js/toggle.password.js') }}"></script>
+    {{-- <script src="{{ asset('assets/js/index2.js') }}"></script> --}}
+
+    {{-- Sweet Alert --}}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @stack('afterScripts')
 </body>
 
 </html>

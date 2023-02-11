@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\StoreRequest;
+use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 
 class UserController extends Controller
@@ -35,8 +36,7 @@ class UserController extends Controller
     {
         $viewData['headTitle'] = 'Edit Pengguna';
         $viewData['user'] = User::find($id);
-        dd("Edit", $viewData);
-        // return view('pages.users.show')->with($viewData);
+        return view('pages.users.edit')->with($viewData);
     }
 
     // Fungsi tambah pengguna baru
@@ -57,8 +57,27 @@ class UserController extends Controller
         return redirect()->route('users.index')->with('alert', $alertData);
     }
 
+    // Fungsi update data pengguna
+    public function update(UpdateRequest $request, $id){
+        $userData = $request->data();
+        $updated = User::find($id)->update($userData);
+
+        // Munculkan pesan error jika update gagal
+        if(!$updated){
+            $alertData['type'] = 'danger';
+            $alertData['message'] = 'Data pengguna gagal diubah.';
+            return redirect()->route('users.index')->with('alert', $alertData);
+        }
+
+        // Munculkan pesan succes jika update berhasil
+        $alertData['type'] = 'success';
+        $alertData['message'] = 'Data pengguna berhasil diubah.';
+        return redirect()->route('users.index')->with('alert', $alertData);
+    }
+
     // Fungsi hapus pengguna
     public function destroy($id){
+        dd('Delete');
         $deleted = User::find($id)->delete();
 
         // Munculkan pesan error jika delete gagal

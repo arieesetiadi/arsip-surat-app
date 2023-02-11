@@ -6,7 +6,7 @@
         <a href="{{ url()->previous() }}" title="Kembali" data-bs-toggle="tooltip" data-bs-placement="left" class="text-dark">
             <i class="bi bi-caret-left"></i>
         </a>
-        DETAIL - {{ $user->name }}
+        DETAIL PENGGUNA - {{ $user->name }}
     </h2>
 
     <div class="container-fluid">
