@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"
-      class="dark-theme">
+      class="semi-dark">
 
 <head>
     <!-- Meta -->
@@ -33,8 +33,8 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <!-- Theme Styles -->
-    <link href="{{ asset('assets/css/dark-theme.css') }}"
-          rel="stylesheet" />
+    {{-- <link href="{{ asset('assets/css/dark-theme.css') }}"
+          rel="stylesheet" /> --}}
     <link href="{{ asset('assets/css/semi-dark.css') }}"
           rel="stylesheet" />
 
@@ -146,7 +146,7 @@
                 <li class="menu-label">Data Master</li>
                 {{-- Sidebar | Pengguna --}}
                 <li>
-                    <a href="{{ route('dashboard') }}">
+                    <a href="#">
                         <div class="parent-icon">
                             <i class="bi bi-person"></i>
                         </div>
@@ -174,6 +174,7 @@
     <!--app-->
     <script src="{{ asset('assets/js/app.js') }}"></script>
     <script src="{{ asset('assets/js/index2.js') }}"></script>
+    <script src="{{ asset('assets/js/toggle.password.js') }}"></script>
 </body>
 
 </html>

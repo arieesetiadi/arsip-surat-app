@@ -43,10 +43,10 @@
                             </div>
                             <div class="col-lg-6">
                                 <div class="card-body p-4 p-sm-5">
-                                    <h5 class="card-title">| Login</h5>
+                                    <h4 class="card-title">Login</h4>
                                     {{-- Tampilkan jika ada alert --}}
                                     @if (session('alert'))
-                                        <p class="card-text">
+                                        <p class="card-text mt-4">
                                             <span class="text-danger">
                                                 <i class="bi bi-exclamation-circle"></i>
                                                 {{ session('alert') }}
@@ -87,18 +87,15 @@
                                                 <div class="w-100 d-flex justify-content-between">
                                                     <label for="password"
                                                            class="form-label">Password</label>
-                                                    <div class="form-check">
-                                                        <input class="form-check-input"
+                                                    <div class="form-check form-switch">
+                                                        <input name="togglePassword"
+                                                               class="form-check-input"
                                                                type="checkbox"
-                                                               id="togglePassword"
                                                                tabindex="-1"
-                                                               value="">
+                                                               id="togglePassword">
                                                         <label class="form-check-label user-select-none"
-                                                               for="togglePassword">
-                                                            Show
-                                                        </label>
+                                                               for="togglePassword">Show</label>
                                                     </div>
-
                                                 </div>
                                                 <div class="ms-auto position-relative">
                                                     <div
@@ -122,7 +119,7 @@
                                                            class="form-check-input"
                                                            type="checkbox"
                                                            id="rememberMe">
-                                                    <label class="form-check-label"
+                                                    <label class="form-check-label user-select-none"
                                                            for="rememberMe">Remember Me</label>
                                                 </div>
                                             </div>
@@ -147,7 +144,6 @@
     <!--plugins-->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/toggle.password.js') }}"></script>
-
 </body>
 
 </html>

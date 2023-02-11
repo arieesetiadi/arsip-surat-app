@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Profile\UpdateRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -13,11 +15,11 @@ class AuthController extends Controller
     }
 
     // Lakukan proses login
-    public function doLogin(Request $data)
+    public function doLogin(Request $request)
     {
         // Ambil data dari form login
-        $loginData = $data->only('username', 'password');
-        $rememberMe = $data->rememberMe == 'on' ? true : false;
+        $loginData = $request->only('username', 'password');
+        $rememberMe = $request->rememberMe == 'on' ? true : false;
 
         // Lakukan proses login
         $result = auth()->attempt($loginData, $rememberMe);
@@ -43,5 +45,24 @@ class AuthController extends Controller
             'headTitle' => 'Profile'
         ];
         return view('pages.profile')->with($viewData);
+    }
+
+    // Fungsi edit profile
+    public function updateProfile(UpdateRequest $request){
+        $profileData = $request->data();
+        $userId = auth()->user()->id;
+        $updated = User::find($userId)->update($profileData);
+
+        // Munculkan pesan error jika update gagal
+        if(!$updated){
+            $alertData['type'] = 'danger';
+            $alertData['message'] = 'Profile anda gagal dirubah.';
+            return back()->with('alert', $alertData);
+        }
+
+        // Munculkan pesan succes jika update berhasil
+        $alertData['type'] = 'success';
+        $alertData['message'] = 'Profile anda berhasil dirubah.';
+        return back()->with('alert', $alertData);
     }
 }
