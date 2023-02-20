@@ -77,7 +77,6 @@ class UserController extends Controller
 
     // Fungsi hapus pengguna
     public function destroy($id){
-        dd('Delete');
         $deleted = User::find($id)->delete();
 
         // Munculkan pesan error jika delete gagal

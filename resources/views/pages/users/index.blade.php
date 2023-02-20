@@ -53,16 +53,18 @@
                                 </a>
 
                                 {{-- Tombol hapus --}}
-                                <form id="formUserDelete{{ $user->id }}"
-                                    action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline-block">
-                                    @csrf
-                                    @method('DELETE')
-                                </form>
-                                <button type="submit" class="btn btn-sm" title="Hapus data {{ $user->name }}"
-                                    data-bs-toggle="tooltip" data-bs-placement="right"
-                                    onclick="swalConfirm('formUserDelete{{ $user->id }}', 'Data dari {{ $user->name }} akan dihapus.')">
-                                    <i class="bi bi-trash"></i>
-                                </button>
+                                <div class="d-inline-block">
+                                    <form id="formUserDelete{{ $user->id }}"
+                                        action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                    </form>
+                                    <a class="btn btn-sm" title="Hapus data {{ $user->name }}"
+                                        data-bs-toggle="tooltip" data-bs-placement="right"
+                                        onclick="swalConfirm('formUserDelete{{ $user->id }}', 'Data dari {{ $user->name }} akan dihapus.')">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
