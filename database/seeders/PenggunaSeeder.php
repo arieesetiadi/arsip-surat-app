@@ -19,7 +19,7 @@ class PenggunaSeeder extends Seeder
             [
                 'username' => 'admin',
                 'password' => Hash::make('admin'),
-                'nama' => 'Admin Officer',
+                'nama' => 'Robert Emerson',
                 'email' => 'admin@gmail.com',
                 'telepon' => '0821xxxxxxxx',
                 'id_jenis_pengguna' => 1,
@@ -29,7 +29,7 @@ class PenggunaSeeder extends Seeder
             [
                 'username' => 'direktur',
                 'password' => Hash::make('direktur'),
-                'nama' => 'Direktur BUMDes',
+                'nama' => 'Alexander Zverev',
                 'email' => 'direktur@gmail.com',
                 'telepon' => '0821xxxxxxxx',
                 'id_jenis_pengguna' => 2,

@@ -41,7 +41,7 @@
             
             {{-- Sidebar | Surat Masuk --}}
             <li>
-                <a href="#">
+                <a href="{{ route('surat-masuk.index') }}">
                     <div class="parent-icon">
                         <i class="bi bi-arrow-down-circle"></i>
                     </div>
@@ -51,7 +51,7 @@
             
             {{-- Sidebar | Surat Keluar --}}
             <li>
-                <a href="#">
+                <a href="{{ route('surat-keluar.index') }}">
                     <div class="parent-icon">
                         <i class="bi bi-arrow-up-circle"></i>
                     </div>

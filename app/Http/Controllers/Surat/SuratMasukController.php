@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Surat;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\FileController;
+use App\Http\Requests\SuratMasuk\StoreRequest;
+use App\Http\Requests\SuratMasuk\UpdateRequest;
 use App\Models\Surat\SuratMasuk;
+use App\Models\T_Lampiran;
+use App\Models\T_SuratMasuk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SuratMasukController extends Controller
 {
@@ -15,9 +21,10 @@ class SuratMasukController extends Controller
      */
     public function index()
     {
-        $viewData['headTitle'] = 'Surat Masuk';
-        // $viewData['suratMasuk'] = SuratMasuk::orderByDesc('id')->get();
-        return view('pages.surat-masuk.index')->with($viewData);
+        $data['title'] = 'Surat Masuk';
+        $data['no_urut'] = 0;
+        // $data['suratMasuk'] = SuratMasuk::orderByDesc('id')->get();
+        return view('pages.surat-masuk.index')->with($data);
     }
 
     /**
@@ -27,8 +34,8 @@ class SuratMasukController extends Controller
      */
     public function create()
     {
-        $viewData['headTitle'] = 'Tambah Surat Masuk';
-        return view('pages.surat-masuk.create')->with($viewData);
+        $data['title'] = 'Tambah Surat Masuk';
+        return view('pages.surat-masuk.create')->with($data);
     }
 
     /**
@@ -37,9 +44,36 @@ class SuratMasukController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        //
+        // DB Transaction
+        DB::beginTransaction();
+
+        // Insert surat masuk
+        $suratMasukData = $request->data();
+        $suratMasuk = T_SuratMasuk::create($suratMasukData);
+
+        // Upload lampiran
+        foreach ($request->lampiran as $lampiran) {
+            $path = 'public\assets\uploads\lampiran';
+            $fileName = FileController::upload($lampiran, $path);
+
+            $lampiranData = [
+                'id_surat' => $suratMasuk->id_surat_masuk,
+                'nama' => $fileName,
+                'jenis' => 'Surat Masuk',
+            ];
+
+            T_Lampiran::create($lampiranData);
+        }
+
+        // End DB Transaction
+        DB::commit();
+
+        // Munculkan pesan succes jika insert berhasil
+        $alert['type'] = 'success';
+        $alert['message'] = 'Data surat masuk berhasil ditambah.';
+        return redirect()->route('surat-masuk.index')->with('alert', $alert);
     }
 
     /**
@@ -71,7 +105,7 @@ class SuratMasukController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         //
     }

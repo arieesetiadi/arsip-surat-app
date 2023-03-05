@@ -13,10 +13,12 @@ class CreateTLampiranTable extends Migration
      */
     public function up()
     {
-        // Schema::create('t_lampiran', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->timestamps();
-        // });
+        Schema::create('t_lampiran', function (Blueprint $table) {
+            $table->integer('id_lampiran')->autoIncrement()->unique();
+            $table->integer('id_surat');
+            $table->string('nama');
+            $table->string('jenis');
+        });
     }
 
     /**

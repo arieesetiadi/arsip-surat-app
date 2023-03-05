@@ -13,138 +13,172 @@
         <div class="row">
             <div class="col-12">
                 {{-- Form edit profile --}}
-                <form action="{{ route('pengguna.store') }}" method="POST" class="form-body">
+                <form action="{{ route('surat-masuk.store') }}" method="POST" class="form-body" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-3 py-4">
-                        {{-- Input username --}}
+                        {{-- Input nomor urut surat --}}
+                        {{-- <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="nomor_urut" class="form-label">Nomor Urut :</label>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-list"></i>
+                                </div>
+                                <input name="nomor_urut" type="text" class="form-control ps-5" id="nomor_urut"
+                                    placeholder="Nomor urut surat" autocomplete="off" value="{{ old('nomor_urut', generateNomorUrut()) }}"
+                                    required disabled aria-disabled="true">
+                            </div>
+                            @error('nomor_urut')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div> --}}
+
+                        {{-- Input nomor surat asal --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="username" class="form-label">Username :</label>
+                            <label for="nomor_surat_asal" class="form-label">Nomor Surat Asal :</label>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-list"></i>
+                                </div>
+                                <input name="nomor_surat_asal" type="text" class="form-control ps-5"
+                                    id="nomor_surat_asal" placeholder="Nomor surat asal" autocomplete="off"
+                                    value="{{ old('nomor_surat_asal') }}" required>
+                            </div>
+                            @error('nomor_surat_asal')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Tanggal surat asal --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="tanggal_surat_asal" class="form-label">Tanggal Surat Asal :</label>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-calendar"></i>
+                                </div>
+                                <input name="tanggal_surat_asal" type="date" class="form-control ps-5"
+                                    id="tanggal_surat_asal" autocomplete="off" value="{{ old('tanggal_surat_asal', now()->toDateString()) }}"
+                                    required>
+                            </div>
+                            @error('tanggal_surat_asal')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Pengirim --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="pengirim" class="form-label">Pengirim :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-person"></i>
                                 </div>
-                                <input name="username" type="text" class="form-control ps-5" id="username"
-                                    placeholder="Masukan username" autocomplete="off" value="{{ old('username') }}"
+                                <input name="pengirim" type="text" class="form-control ps-5" id="pengirim"
+                                    placeholder="Masukan pengirim" autocomplete="off" value="{{ old('pengirim') }}"
                                     required>
                             </div>
-                            @error('username')
+                            @error('pengirim')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
-                        {{-- Input nama lengkap --}}
+                        {{-- Tanggal diterima --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="name" class="form-label">Nama Lengkap :</label>
+                            <label for="tanggal_diterima" class="form-label">Tanggal Diterima :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-card-list"></i>
+                                    <i class="bi bi-calendar"></i>
                                 </div>
-                                <input name="name" type="text" class="form-control ps-5" id="name"
-                                    placeholder="Masukan nama lengkap" autocomplete="off" value="{{ old('name') }}"
+                                <input name="tanggal_diterima" type="date" class="form-control ps-5"
+                                    id="tanggal_diterima" autocomplete="off" value="{{ old('tanggal_diterima', now()->toDateString()) }}" required>
+                            </div>
+                            @error('tanggal_diterima')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Penerima --}}
+                        {{-- <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="penerima" class="form-label">Penerima :</label>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-person"></i>
+                                </div>
+                                <input name="penerima" type="text" class="form-control ps-5" id="penerima"
+                                    placeholder="Masukan penerima" autocomplete="off" value="{{ old('penerima', pengguna()->nama) }}"
+                                    required disabled aria-disabled="true">
+                            </div>
+                            @error('penerima')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div> --}}
+
+                        {{-- Perihal --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="perihal" class="form-label">Perihal :</label>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-bookmark"></i>
+                                </div>
+                                <input name="perihal" type="text" class="form-control ps-5" id="perihal"
+                                    placeholder="Masukan perihal" autocomplete="off" value="{{ old('perihal') }}"
                                     required>
                             </div>
-                            @error('name')
+                            @error('perihal')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
-                        {{-- Input email --}}
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="email" class="form-label">Email :</label>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-envelope"></i>
-                                </div>
-                                <input name="email" type="email" class="form-control ps-5" id="email"
-                                    placeholder="Masukan alamat email" autocomplete="off" value="{{ old('email') }}"
-                                    required>
-                            </div>
-                            @error('email')
-                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        {{-- Input telepon --}}
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="phone" class="form-label">Nomor Telepon :</label>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-phone"></i>
-                                </div>
-                                <input name="phone" type="number" class="form-control ps-5" id="phone"
-                                    placeholder="Masukan nomor telepon" autocomplete="off" value="{{ old('phone') }}"
-                                    required>
-                            </div>
-                            @error('phone')
-                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        {{-- Input password --}}
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="w-100 d-flex justify-content-between">
-                                <label for="password" class="form-label">Password :</label>
-                                <div class="form-check form-switch">
-                                    <input name="togglePassword" class="form-check-input" type="checkbox" tabindex="-1"
-                                        id="togglePassword">
-                                    <label class="form-check-label user-select-none" for="togglePassword">Show</label>
-                                </div>
-                            </div>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-lock"></i>
-                                </div>
-                                <input name="password" type="password" class="form-control ps-5" id="password"
-                                    placeholder="Masukan password" autocomplete="off" required>
-                            </div>
-                            @error('password')
-                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        {{-- Input password confirmation --}}
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <div class="w-100 d-flex justify-content-between">
-                                <label for="password_confirmation" class="form-label">Konfirmasi Password :</label>
-                                <div class="form-check form-switch">
-                                    <input name="togglePasswordConfirmation" class="form-check-input" type="checkbox"
-                                        tabindex="-1" id="togglePasswordConfirmation">
-                                    <label class="form-check-label user-select-none"
-                                        for="togglePasswordConfirmation">Show</label>
-                                </div>
-                            </div>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-lock"></i>
-                                </div>
-                                <input name="password_confirmation" type="password" class="form-control ps-5"
-                                    id="password_confirmation" placeholder="Masukan password" autocomplete="off"
-                                    required>
-                            </div>
-                            @error('password')
-                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
-                            @enderror
-                        </div>
-
-                        {{-- Input jenis pengguna --}}
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="role" class="form-label">Jenis Pengguna :</label>
-                            <select name="role" id="role" class="form-select" aria-label="Jenis pengguna">
-                                @if (old('role') == 'Admin Officer')
-                                    <option value="Admin Officer" selected>Admin Officer</option>
-                                    <option value="Direktur BUMDes">Direktur BUMDes</option>
-                                @elseif (old('role') == 'Direktur BUMDes')
-                                    <option value="Admin Officer">Admin Officer</option>
-                                    <option value="Direktur BUMDes" selected>Direktur BUMDes</option>
+                        {{-- Input Status --}}
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <label for="status" class="form-label">Status :</label>
+                            <select name="status" id="status" class="form-select" aria-label="Status">
+                                @if (old('status') == 'Asli')
+                                    <option value="Asli" selected>Asli</option>
+                                    <option value="Tembusan">Tembusan</option>
+                                @elseif (old('status') == 'Tembusan')
+                                    <option value="Asli">Asli</option>
+                                    <option value="Tembusan" selected>Tembusan</option>
                                 @else
-                                    <option selected hidden>Pilih jenis pengguna</option>
-                                    <option value="Admin Officer">Admin Officer</option>
-                                    <option value="Direktur BUMDes">Direktur BUMDes</option>
+                                    <option selected hidden>Pilih Status</option>
+                                    <option value="Asli">Asli</option>
+                                    <option value="Tembusan">Tembusan</option>
                                 @endif
                             </select>
-                            @error('role')
+                            @error('status')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
+                        </div>
+
+                        {{-- Input Sifat --}}
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <label for="sifat" class="form-label">Sifat :</label>
+                            <select name="sifat" id="sifat" class="form-select" aria-label="Sifat">
+                                @if (old('sifat') == 'Segera')
+                                    <option value="Segera" selected>Segera</option>
+                                    <option value="Sangat Segera">Sangat Segera</option>
+                                    <option value="Kilat">Kilat</option>
+                                @elseif (old('sifat') == 'Sangat Segera')
+                                    <option value="Segera">Segera</option>
+                                    <option value="Sangat Segera" selected>Sangat Segera</option>
+                                    <option value="Kilat">Kilat</option>
+                                @elseif (old('sifat') == 'Kilat')
+                                    <option value="Segera">Segera</option>
+                                    <option value="Sangat Segera">Sangat Segera</option>
+                                    <option value="Kilat" selected>Kilat</option>
+                                @else
+                                    <option selected hidden>Pilih Sifat</option>
+                                    <option value="Segera">Segera</option>
+                                    <option value="Sangat Segera">Sangat Segera</option>
+                                    <option value="Kilat">Kilat</option>
+                                @endif
+                            </select>
+                            @error('sifat')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="lampiran" class="form-label">Unggah Lampiran :</label>
+                            <input name="lampiran[]" class="form-control" type="file" id="lampiran" multiple>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">

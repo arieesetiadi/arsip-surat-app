@@ -15,9 +15,9 @@ class SuratKeluarController extends Controller
      */
     public function index()
     {
-        $viewData['headTitle'] = 'Surat Keluar';
-        // $viewData['suratKeluar'] = SuratKeluar::orderByDesc('id')->get();
-        return view('pages.surat-keluar.index')->with($viewData);
+        $data['title'] = 'Surat Keluar';
+        // $data['suratKeluar'] = SuratKeluar::orderByDesc('id')->get();
+        return view('pages.surat-keluar.index')->with($data);
     }
 
     /**

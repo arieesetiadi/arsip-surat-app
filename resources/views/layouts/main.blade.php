@@ -25,7 +25,7 @@
         @include('layouts.sidebar')
 
         <!-- Main Content-->
-        <main class="page-content">
+        <main class="page-content p-5">
             @yield('content')
         </main>
     </div>
