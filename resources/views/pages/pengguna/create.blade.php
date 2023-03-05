@@ -13,7 +13,7 @@
         <div class="row">
             <div class="col-12">
                 {{-- Form edit profile --}}
-                <form action="{{ route('users.store') }}" method="POST" class="form-body">
+                <form action="{{ route('pengguna.store') }}" method="POST" class="form-body">
                     @csrf
                     <div class="row g-3 py-4">
                         {{-- Input username --}}
@@ -34,16 +34,16 @@
 
                         {{-- Input nama lengkap --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="name" class="form-label">Nama Lengkap :</label>
+                            <label for="nama" class="form-label">Nama Lengkap :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-card-list"></i>
                                 </div>
-                                <input name="name" type="text" class="form-control ps-5" id="name"
-                                    placeholder="Masukan nama lengkap" autocomplete="off" value="{{ old('name') }}"
+                                <input name="nama" type="text" class="form-control ps-5" id="nama"
+                                    placeholder="Masukan nama lengkap" autocomplete="off" value="{{ old('nama') }}"
                                     required>
                             </div>
-                            @error('name')
+                            @error('nama')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
@@ -66,16 +66,16 @@
 
                         {{-- Input telepon --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="phone" class="form-label">Nomor Telepon :</label>
+                            <label for="telepon" class="form-label">Nomor Telepon :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-phone"></i>
                                 </div>
-                                <input name="phone" type="number" class="form-control ps-5" id="phone"
-                                    placeholder="Masukan nomor telepon" autocomplete="off" value="{{ old('phone') }}"
+                                <input name="telepon" type="number" class="form-control ps-5" id="telepon"
+                                    placeholder="Masukan nomor telepon" autocomplete="off" value="{{ old('telepon') }}"
                                     required>
                             </div>
-                            @error('phone')
+                            @error('telepon')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
@@ -128,21 +128,21 @@
 
                         {{-- Input jenis pengguna --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="role" class="form-label">Jenis Pengguna :</label>
-                            <select name="role" id="role" class="form-select" aria-label="Jenis pengguna">
-                                @if (old('role') == 'Admin Officer')
-                                    <option value="Admin Officer" selected>Admin Officer</option>
-                                    <option value="Direktur BUMDes">Direktur BUMDes</option>
-                                @elseif (old('role') == 'Direktur BUMDes')
-                                    <option value="Admin Officer">Admin Officer</option>
-                                    <option value="Direktur BUMDes" selected>Direktur BUMDes</option>
-                                @else
-                                    <option selected hidden>Pilih jenis pengguna</option>
-                                    <option value="Admin Officer">Admin Officer</option>
-                                    <option value="Direktur BUMDes">Direktur BUMDes</option>
-                                @endif
+                            <label for="id_jenis_pengguna" class="form-label">Jenis Pengguna :</label>
+                            <select name="id_jenis_pengguna" id="id_jenis_pengguna" class="form-select"
+                                aria-label="Jenis pengguna">
+                                @foreach ($jenis_pengguna as $j)
+                                    @if (old('id_jenis_pengguna'))
+                                        <option value="{{ $j->id_jenis_pengguna }}"
+                                            {{ old('id_jenis_pengguna') == $j->id_jenis_pengguna ? 'selected' : '' }}>
+                                            {{ $j->nama }}</option>
+                                    @else
+                                        <option selected hidden>Pilih jenis pengguna</option>
+                                        <option value="{{ $j->id_jenis_pengguna }}">{{ $j->nama }}</option>
+                                    @endif
+                                @endforeach
                             </select>
-                            @error('role')
+                            @error('id_jenis_pengguna')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>

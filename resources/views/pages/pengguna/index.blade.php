@@ -11,7 +11,7 @@
         </div>
 
         {{-- Tombol tambah pengguna --}}
-        <a href="{{ route('users.create') }}" title="Tambah Pengguna" data-bs-toggle="tooltip" data-bs-placement="left"
+        <a href="{{ route('pengguna.create') }}" title="Tambah Pengguna" data-bs-toggle="tooltip" data-bs-placement="left"
             class="btn btn-primary">
             <i class="bi bi-plus-circle"></i>
             Tambah Pengguna
@@ -24,6 +24,7 @@
                 <thead>
                     <tr>
                         <th>No.</th>
+                        <th>Jenis Pengguna</th>
                         <th>Username</th>
                         <th>Nama</th>
                         <th>Email</th>
@@ -32,36 +33,37 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($users as $i => $user)
-                        <tr>
+                    @foreach ($pengguna as $i => $p)
+                        <tr class="{{ $p->id_pengguna == pengguna()->id_pengguna ? 'fw-bold' : '' }}">
                             <td>{{ $i + 1 }}</td>
-                            <td>{{ $user->username }}</td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone }}</td>
+                            <td>{{ $p->jenis_pengguna->nama }}</td>
+                            <td>{{ $p->username }}</td>
+                            <td>{{ $p->nama }}</td>
+                            <td>{{ $p->email }}</td>
+                            <td>{{ $p->telepon }}</td>
                             <td>
                                 {{-- Tombol detail --}}
-                                <a href="{{ route('users.show', $user->id) }}" title="Detail dari {{ $user->name }}"
+                                <a href="{{ route('pengguna.show', $p->id_pengguna) }}" title="Detail dari {{ $p->nama }}"
                                     data-bs-toggle="tooltip" data-bs-placement="right" class="btn btn-sm">
                                     <i class="bi bi-eye"></i>
                                 </a>
 
                                 {{-- Tombol ubah --}}
-                                <a href="{{ route('users.edit', $user->id) }}" title="Edit data {{ $user->name }}"
+                                <a href="{{ route('pengguna.edit', $p->id_pengguna) }}" title="Edit data {{ $p->nama }}"
                                     data-bs-toggle="tooltip" data-bs-placement="right" class="btn btn-sm">
                                     <i class="bi bi-pen"></i>
                                 </a>
 
                                 {{-- Tombol hapus --}}
                                 <div class="d-inline-block">
-                                    <form id="formUserDelete{{ $user->id }}"
-                                        action="{{ route('users.destroy', $user->id) }}" method="POST" class="d-inline-block">
+                                    <form id="formUserDelete{{ $p->id_pengguna }}"
+                                        action="{{ route('pengguna.destroy', $p->id_pengguna) }}" method="POST" class="d-inline-block">
                                         @csrf
                                         @method('DELETE')
                                     </form>
-                                    <a class="btn btn-sm" title="Hapus data {{ $user->name }}"
+                                    <a class="btn btn-sm" title="Hapus data {{ $p->nama }}"
                                         data-bs-toggle="tooltip" data-bs-placement="right"
-                                        onclick="swalConfirm('formUserDelete{{ $user->id }}', 'Data dari {{ $user->name }} akan dihapus.')">
+                                        onclick="swalConfirm('formUserDelete{{ $p->id_pengguna }}', 'Data dari {{ $p->nama }} akan dihapus.')">
                                         <i class="bi bi-trash"></i>
                                     </a>
                                 </div>

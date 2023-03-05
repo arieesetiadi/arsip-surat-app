@@ -6,7 +6,7 @@
         <a href="{{ url()->previous() }}" title="Kembali" data-bs-toggle="tooltip" data-bs-placement="left" class="text-dark">
             <i class="bi bi-caret-left"></i>
         </a>
-        DETAIL PENGGUNA - {{ $user->name }}
+        DETAIL PENGGUNA - {{ $pengguna->nama }}
     </h2>
 
     <div class="container-fluid">
@@ -34,7 +34,7 @@
                             <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                 <i class="bi bi-person"></i>
                             </div>
-                            <input type="text" class="form-control ps-5" value="{{ old('username', $user->username) }}"
+                            <input type="text" class="form-control ps-5" value="{{ old('username', $pengguna->username) }}"
                                 required disabled>
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                 <i class="bi bi-card-list"></i>
                             </div>
-                            <input type="text" class="form-control ps-5" value="{{ old('name', $user->name) }}" required
+                            <input type="text" class="form-control ps-5" value="{{ old('name', $pengguna->nama) }}" required
                                 disabled>
                         </div>
                     </div>
@@ -58,7 +58,7 @@
                             <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                 <i class="bi bi-envelope"></i>
                             </div>
-                            <input type="email" class="form-control ps-5" value="{{ old('email', $user->email) }}"
+                            <input type="email" class="form-control ps-5" value="{{ old('email', $pengguna->email) }}"
                                 required disabled>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                 <i class="bi bi-phone"></i>
                             </div>
-                            <input type="text" class="form-control ps-5" value="{{ old('phone', $user->phone) }}"
+                            <input type="text" class="form-control ps-5" value="{{ old('phone', $pengguna->telepon) }}"
                                 required disabled>
                         </div>
                     </div>

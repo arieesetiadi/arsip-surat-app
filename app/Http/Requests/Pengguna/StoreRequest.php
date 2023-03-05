@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Pengguna;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
@@ -25,12 +25,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'username' => 'required|string|unique:users,username',
-            'name' => 'required|string|min:8|max:255',
-            'email' => 'required|email|min:8|max:255|unique:users,email',
-            'phone' => 'required|string|min:10|max:15',
+            'username' => 'required|string|unique:t_pengguna,username',
+            'nama' => 'required|string|min:8|max:255',
+            'email' => 'required|email|min:8|max:255|unique:t_pengguna,email',
+            'telepon' => 'required|string|min:10|max:15',
             'password' => 'required|max:255|confirmed',
-            'role' => 'required',
+            'id_jenis_pengguna' => 'required',
         ];
     }
 
@@ -38,11 +38,11 @@ class StoreRequest extends FormRequest
     {
         return [
             'username' => 'Username',
-            'name' => 'Nama lengkap',
+            'nama' => 'Nama lengkap',
             'email' => 'Email',
-            'phone' => 'Nomor telepon',
+            'telepon' => 'Nomor telepon',
             'pasword' => 'Password',
-            'role' => 'Jenis pengguna'
+            'id_jenis_pengguna' => 'Jenis pengguna'
         ];
     }
 
@@ -63,11 +63,11 @@ class StoreRequest extends FormRequest
         $data = [
             'username' => $this->username,
             'password' => Hash::make($this->password),
-            'name' => $this->name,
+            'nama' => $this->nama,
             'email' => $this->email,
-            'phone' => $this->phone,
-            'role' => $this->role,
-            'created_at' => now()
+            'telepon' => $this->telepon,
+            'id_jenis_pengguna' => $this->id_jenis_pengguna,
+            'tanggal_dibuat' => now()
         ];
 
         return $data;

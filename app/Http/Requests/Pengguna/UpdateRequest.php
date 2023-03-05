@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Requests\Profile;
+namespace App\Http\Requests\Pengguna;
 
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequest extends FormRequest
 {
@@ -24,21 +24,30 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'username' => 'required|string|unique:users,username,' . auth()->user()->id,
-            'name' => 'required|string|min:8|max:255',
-            'email' => 'required|email|min:8|max:255|unique:users,email,' . auth()->user()->id,
-            'phone' => 'required|string|min:10|max:15',
+        $rules = [
+            'username' => 'required|string|unique:t_pengguna,username,' . request()->route()->pengguna . ',id_pengguna',
+            'nama' => 'required|string|min:8|max:255',
+            'email' => 'required|email|min:8|max:255|unique:t_pengguna,email,' . request()->route()->pengguna . ',id_pengguna',
+            'telepon' => 'required|string|min:10|max:15',
+            'id_jenis_pengguna' => 'required',
         ];
+
+        if($this->password){
+            $rules['password'] = 'required|max:255|confirmed';
+        }
+
+        return $rules;
     }
 
     public function attributes()
     {
         return [
             'username' => 'Username',
-            'name' => 'Nama lengkap',
+            'nama' => 'Nama lengkap',
             'email' => 'Email',
-            'phone' => 'Nomor telepon',
+            'telepon' => 'Nomor telepon',
+            'pasword' => 'Password',
+            'id_jenis_pengguna' => 'Jenis pengguna'
         ];
     }
 
@@ -51,16 +60,18 @@ class UpdateRequest extends FormRequest
             'min' => ':attribute harus memiliki minimal :min karakter.',
             'max' => ':attribute harus memiliki maksimal :max karakter.',
             'unique' => ':attribute ini telah terdaftar.',
+            'confirmed' => 'Konfirmasi password harus sama.'
         ];
     }
 
     public function data(){
         $data = [
             'username' => $this->username,
-            'name' => $this->name,
+            'nama' => $this->nama,
             'email' => $this->email,
-            'phone' => $this->phone,
-            'updated_at' => now()
+            'telepon' => $this->telepon,
+            'id_jenis_pengguna' => $this->id_jenis_pengguna,
+            'tanggal_diubah' => now()
         ];
 
         if($this->password){

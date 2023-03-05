@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Profile\UpdateRequest;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
@@ -25,7 +23,7 @@ class AuthController extends Controller
         $result = auth()->attempt($loginData, $rememberMe);
 
         // Cek hasil proses login
-        if(!$result){
+        if (!$result) {
             return back()->with('alert', 'Username atau password anda tidak valid.');
         }
 
@@ -34,7 +32,8 @@ class AuthController extends Controller
     }
 
     // Fungsi logout
-    public function logout(){
+    public function logout()
+    {
         auth()->logout();
         return redirect()->route('login');
     }

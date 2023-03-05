@@ -24,13 +24,16 @@ File: style.css
  */
 
 
-/* General */
+/* Setup Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;1,200;1,500&display=swap');
 
+/* General */
 body {
     font-size: 14px;
 	color: #4c5258;
 	letter-spacing: .5px;
-    font-family: Roboto, sans-serif;
+    /* font-family: Roboto, sans-serif; */
+	font-family: 'Poppins', sans-serif;
     background-color: #f7f8fa;
     overflow-x: hidden;
 }

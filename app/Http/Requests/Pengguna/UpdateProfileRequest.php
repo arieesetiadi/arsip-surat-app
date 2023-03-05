@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\User;
+namespace App\Http\Requests\Pengguna;
 
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Hash;
 
-class UpdateRequest extends FormRequest
+class UpdateProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,30 +24,21 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = [
-            'username' => 'required|string|unique:users,username,' . request()->route()->id,
-            'name' => 'required|string|min:8|max:255',
-            'email' => 'required|email|min:8|max:255|unique:users,email,' . request()->route()->id,
-            'phone' => 'required|string|min:10|max:15',
-            'role' => 'required',
+        return [
+            'username' => 'required|string|unique:t_pengguna,username,' . pengguna()->id_pengguna . ',id_pengguna',
+            'nama' => 'required|string|min:8|max:255',
+            'email' => 'required|email|min:8|max:255|unique:t_pengguna,email,' . pengguna()->id_pengguna . ',id_pengguna',
+            'telepon' => 'required|string|min:10|max:15',
         ];
-
-        if($this->password){
-            $rules['password'] = 'required|max:255|confirmed';
-        }
-
-        return $rules;
     }
 
     public function attributes()
     {
         return [
             'username' => 'Username',
-            'name' => 'Nama lengkap',
+            'nama' => 'Nama lengkap',
             'email' => 'Email',
-            'phone' => 'Nomor telepon',
-            'pasword' => 'Password',
-            'role' => 'Jenis pengguna'
+            'telepon' => 'Nomor telepon',
         ];
     }
 
@@ -60,18 +51,16 @@ class UpdateRequest extends FormRequest
             'min' => ':attribute harus memiliki minimal :min karakter.',
             'max' => ':attribute harus memiliki maksimal :max karakter.',
             'unique' => ':attribute ini telah terdaftar.',
-            'confirmed' => 'Konfirmasi password harus sama.'
         ];
     }
 
     public function data(){
         $data = [
             'username' => $this->username,
-            'name' => $this->name,
+            'nama' => $this->nama,
             'email' => $this->email,
-            'phone' => $this->phone,
-            'role' => $this->role,
-            'created_at' => now()
+            'telepon' => $this->telepon,
+            'tanggal_diubah' => now()
         ];
 
         if($this->password){

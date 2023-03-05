@@ -2,11 +2,46 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\Surat\SuratKeluarController;
+use App\Http\Controllers\Surat\SuratMasukController;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\Routing\Annotation\Route as AnnotationRoute;
+
+// Guest
+Route::middleware('guest')->group(function () {
+    // Route untuk Login
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+});
+
+
+// Auth
+Route::middleware('auth')->group(function () {
+    // Route untuk Dashboard
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+
+    // Route untuk Logout
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+
+    
+    // Route untuk kelola Pengguna
+    Route::get('/profile', [PenggunaController::class, 'profileView'])->name('profile.view');
+    Route::put('/profile/update', [PenggunaController::class, 'profileUpdate'])->name('profile.update');
+    Route::resource('/pengguna', PenggunaController::class);
+
+    // Route surat masuk
+    Route::controller(SuratMasukController::class)->group(function () {
+        Route::resource('/surat-masuk', SuratMasukController::class);
+    });
+
+    // Route surat keluar
+    Route::controller(SuratKeluarController::class)->group(function () {
+        Route::resource('/surat-keluar', SuratKeluarController::class);
+    });
+});
+
 
 // Clear app
 Route::get('/clear-app', function(){
@@ -18,37 +53,8 @@ Route::get('/clear-app', function(){
     return back();
 });
 
-
-// Guest
-Route::middleware('guest')->group(function () {
-    // Route Login
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
-});
-
-
-// Auth
-Route::middleware('auth')->group(function () {
-    // Route Dashboard
-    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-
-    // Route Logout
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    // Route Profile
-    Route::prefix('profile')->as('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('index');
-        Route::put('/update', [ProfileController::class, 'update'])->name('update');
-    });
-
-    // Route User
-    Route::prefix('/users')->as('users.')->group(function () {
-        Route::get('/', [UserController::class, 'index'])->name('index');
-        Route::get('/create', [UserController::class, 'create'])->name('create');
-        Route::post('/store', [UserController::class, 'store'])->name('store');
-        Route::get('/{id}', [UserController::class, 'show'])->name('show');
-        Route::get('/{id}/edit', [UserController::class, 'edit'])->name('edit');
-        Route::put('/{id}/update', [UserController::class, 'update'])->name('update');
-        Route::delete('/{id}/destroy', [UserController::class, 'destroy'])->name('destroy');
-    });
+// Hash text
+Route::get('/hash/{text}', function($text){
+    $hashedText = Hash::make($text);
+    dd($hashedText);
 });

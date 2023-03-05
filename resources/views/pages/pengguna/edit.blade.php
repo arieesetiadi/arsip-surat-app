@@ -2,40 +2,18 @@
 
 @section('content')
     <h2 class="mb-4">
-        <i class="bi bi-person"></i>
-        Profile
+        {{-- Tombol kembali --}}
+        <a href="{{ url()->previous() }}" title="Kembali" data-bs-toggle="tooltip" data-bs-placement="left" class="text-dark">
+            <i class="bi bi-caret-left"></i>
+        </a>
+        EDIT PENGGUNA - {{ $pengguna->nama }}
     </h2>
 
     <div class="container-fluid">
         <div class="row">
-            {{-- Left section --}}
-            <div class="col-sm-12 col-md-6 col-lg-4 p-4">
-                <center>
-                    <img src="{{ asset('assets/images/icons/profile.png') }}" alt="Profile Picture" width="200"
-                        class="img-fluid img-thumbnail rounded-circle my-4">
-                    <h5>
-                        {{ auth()->user()->name }}
-                    </h5>
-                    <hr>
-                    <span>
-                        <i class="bi bi-envelope"></i>
-                        {{ auth()->user()->email }}
-                    </span>
-                </center>
-            </div>
-
-            {{-- Right section --}}
-            <div class="col-sm-12 col-md-6 col-lg-8 p-4">
-                {{-- Tampilkan pesan sukses --}}
-                @include('components.alert')
-
-                <h6>
-                    <i class="bi bi-gear text-dark"></i>
-                    Pengaturan Profile
-                </h6>
-
+            <div class="col-12">
                 {{-- Form edit profile --}}
-                <form action="{{ route('profile.update') }}" method="POST" class="form-body">
+                <form action="{{ route('pengguna.update', $pengguna->id_pengguna) }}" method="POST" class="form-body">
                     @csrf
                     @method('PUT')
                     <div class="row g-3 py-4">
@@ -48,7 +26,7 @@
                                 </div>
                                 <input name="username" type="text" class="form-control ps-5" id="username"
                                     placeholder="Masukan username" autocomplete="off"
-                                    value="{{ old('username', auth()->user()->username) }}" required>
+                                    value="{{ old('username', $pengguna->username) }}" required>
                             </div>
                             @error('username')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
@@ -57,16 +35,16 @@
 
                         {{-- Input nama lengkap --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="name" class="form-label">Nama Lengkap :</label>
+                            <label for="nama" class="form-label">Nama Lengkap :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-card-list"></i>
                                 </div>
-                                <input name="name" type="text" class="form-control ps-5" id="name"
+                                <input name="nama" type="text" class="form-control ps-5" id="nama"
                                     placeholder="Masukan nama lengkap" autocomplete="off"
-                                    value="{{ old('name', auth()->user()->name) }}" required>
+                                    value="{{ old('nama', $pengguna->nama) }}" required>
                             </div>
-                            @error('name')
+                            @error('nama')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
@@ -80,7 +58,7 @@
                                 </div>
                                 <input name="email" type="email" class="form-control ps-5" id="email"
                                     placeholder="Masukan alamat email" autocomplete="off"
-                                    value="{{ old('email', auth()->user()->email) }}" required>
+                                    value="{{ old('email', $pengguna->email) }}" required>
                             </div>
                             @error('email')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
@@ -89,24 +67,24 @@
 
                         {{-- Input telepon --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="phone" class="form-label">Nomor Telepon :</label>
+                            <label for="telepon" class="form-label">Nomor Telepon :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-phone"></i>
                                 </div>
-                                <input name="phone" type="number" class="form-control ps-5" id="phone"
+                                <input name="telepon" type="number" class="form-control ps-5" id="telepon"
                                     placeholder="Masukan nomor telepon" autocomplete="off"
-                                    value="{{ old('phone', auth()->user()->phone) }}" required>
+                                    value="{{ old('telepon', $pengguna->telepon) }}" required>
                             </div>
-                            @error('phone')
+                            @error('telepon')
                                 <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
                         {{-- Input password --}}
-                        <div class="col-12">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
                             <div class="w-100 d-flex justify-content-between">
-                                <label for="password" class="form-label">Password (Optional) :</label>
+                                <label for="password" class="form-label">Password (Optional):</label>
                                 <div class="form-check form-switch">
                                     <input name="togglePassword" class="form-check-input" type="checkbox" tabindex="-1"
                                         id="togglePassword">
@@ -120,9 +98,56 @@
                                 <input name="password" type="password" class="form-control ps-5" id="password"
                                     placeholder="Masukan password" autocomplete="off">
                             </div>
+                            @error('password')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Input password confirmation --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <div class="w-100 d-flex justify-content-between">
+                                <label for="password_confirmation" class="form-label">Konfirmasi Password :</label>
+                                <div class="form-check form-switch">
+                                    <input name="togglePasswordConfirmation" class="form-check-input" type="checkbox"
+                                        tabindex="-1" id="togglePasswordConfirmation">
+                                    <label class="form-check-label user-select-none"
+                                        for="togglePasswordConfirmation">Show</label>
+                                </div>
+                            </div>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-lock"></i>
+                                </div>
+                                <input name="password_confirmation" type="password" class="form-control ps-5"
+                                    id="password_confirmation" placeholder="Masukan password" autocomplete="off">
+                            </div>
+                            @error('password')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
+                        </div>
+
+                        {{-- Input jenis pengguna --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="id_jenis_pengguna" class="form-label">Jenis Pengguna :</label>
+                            <select name="id_jenis_pengguna" id="id_jenis_pengguna" class="form-select"
+                                aria-label="Jenis pengguna">
+                                @foreach ($jenis_pengguna as $j)
+                                    @if (old('id_jenis_pengguna'))
+                                        <option value="{{ $j->id_jenis_pengguna }}"
+                                            {{ old('id_jenis_pengguna') == $j->id_jenis_pengguna ? 'selected' : '' }}>
+                                            {{ $j->nama }}</option>
+                                    @else
+                                        <option value="{{ $j->id_jenis_pengguna }}"
+                                            {{ $pengguna->jenis_pengguna->id_jenis_pengguna == $j->id_jenis_pengguna ? 'selected' : '' }}>
+                                            {{ $j->nama }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('id_jenis_pengguna')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
-
                     <button type="submit" class="btn btn-primary w-100">
                         <i class="bi bi-check-circle d-inline-block mx-1"></i>
                         Simpan
@@ -131,4 +156,8 @@
             </div>
         </div>
     </div>
+
+    @push('afterScripts')
+        <script src="{{ asset('assets/js/toggle.password.js') }}"></script>
+    @endpush
 @endsection
