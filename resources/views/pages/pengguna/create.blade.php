@@ -131,7 +131,7 @@
                             <label for="id_jenis_pengguna" class="form-label">Jenis Pengguna :</label>
                             <select name="id_jenis_pengguna" id="id_jenis_pengguna" class="form-select"
                                 aria-label="Jenis pengguna">
-                                @foreach ($jenis_pengguna as $j)
+                                @foreach ($jenisPengguna as $j)
                                     @if (old('id_jenis_pengguna'))
                                         <option value="{{ $j->id_jenis_pengguna }}"
                                             {{ old('id_jenis_pengguna') == $j->id_jenis_pengguna ? 'selected' : '' }}>

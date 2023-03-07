@@ -22,8 +22,7 @@ class SuratMasukController extends Controller
     public function index()
     {
         $data['title'] = 'Surat Masuk';
-        $data['no_urut'] = 0;
-        // $data['suratMasuk'] = SuratMasuk::orderByDesc('id')->get();
+        $data['suratMasuk'] = T_SuratMasuk::getAll();
         return view('pages.surat-masuk.index')->with($data);
     }
 
@@ -84,7 +83,9 @@ class SuratMasukController extends Controller
      */
     public function show($id)
     {
-        //
+        $data['title'] = 'Detail Surat Masuk';
+        $data['suratMasuk'] = T_SuratMasuk::find($id);
+        return view('pages.surat-masuk.show')->with($data);
     }
 
     /**

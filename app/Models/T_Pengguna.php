@@ -18,12 +18,7 @@ class T_Pengguna extends Authenticatable
     public $timestamps = false;
 
     // Relationship
-    public function jenis_pengguna(){
+    public function jenisPengguna(){
         return $this->hasOne(T_JenisPengguna::class, 'id_jenis_pengguna', 'id_jenis_pengguna');
-    }
-    
-    // Methods
-    public function scopeIsAdmin($query){
-        return $query;
     }
 }

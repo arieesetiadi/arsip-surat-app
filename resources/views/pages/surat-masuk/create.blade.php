@@ -12,26 +12,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                {{-- Form edit profile --}}
                 <form action="{{ route('surat-masuk.store') }}" method="POST" class="form-body" enctype="multipart/form-data">
                     @csrf
                     <div class="row g-3 py-4">
-                        {{-- Input nomor urut surat --}}
-                        {{-- <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="nomor_urut" class="form-label">Nomor Urut :</label>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-list"></i>
-                                </div>
-                                <input name="nomor_urut" type="text" class="form-control ps-5" id="nomor_urut"
-                                    placeholder="Nomor urut surat" autocomplete="off" value="{{ old('nomor_urut', generateNomorUrut()) }}"
-                                    required disabled aria-disabled="true">
-                            </div>
-                            @error('nomor_urut')
-                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
-                            @enderror
-                        </div> --}}
-
                         {{-- Input nomor surat asal --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <label for="nomor_surat_asal" class="form-label">Nomor Surat Asal :</label>

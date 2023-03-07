@@ -20,7 +20,7 @@
 
     <div class="container-fluid">
         <div class="table-responsive">
-            <table id="example" class="table table-lg table-striped table-bordered" style="width:100%">
+            <table class="table table-lg table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -36,7 +36,7 @@
                     @foreach ($pengguna as $i => $p)
                         <tr class="{{ $p->id_pengguna == pengguna()->id_pengguna ? 'fw-bold' : '' }}">
                             <td>{{ $i + 1 }}</td>
-                            <td>{{ $p->jenis_pengguna->nama }}</td>
+                            <td>{{ $p->jenisPengguna->nama }}</td>
                             <td>{{ $p->username }}</td>
                             <td>{{ $p->nama }}</td>
                             <td>{{ $p->email }}</td>

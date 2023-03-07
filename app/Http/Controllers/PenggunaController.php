@@ -19,7 +19,7 @@ class PenggunaController extends Controller
     public function index()
     {
         $data['title'] = 'Pengguna';
-        $data['pengguna'] = T_Pengguna::with('jenis_pengguna')->orderByDesc('id_pengguna')->get();
+        $data['pengguna'] = T_Pengguna::with('jenisPengguna')->orderByDesc('id_pengguna')->get();
         return view('pages.pengguna.index')->with($data);
     }
 
@@ -31,7 +31,7 @@ class PenggunaController extends Controller
     public function create()
     {
         $data['title'] = 'Tambah Pengguna';
-        $data['jenis_pengguna'] = T_JenisPengguna::all();
+        $data['jenisPengguna'] = T_JenisPengguna::all();
         return view('pages.pengguna.create')->with($data);
     }
 
@@ -82,7 +82,7 @@ class PenggunaController extends Controller
     {
         $data['title'] = 'Edit Pengguna';
         $data['pengguna'] = T_Pengguna::find($id);
-        $data['jenis_pengguna'] = T_JenisPengguna::all();
+        $data['jenisPengguna'] = T_JenisPengguna::all();
         return view('pages.pengguna.edit')->with($data);
     }
 

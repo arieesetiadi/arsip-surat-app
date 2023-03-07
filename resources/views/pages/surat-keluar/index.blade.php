@@ -20,7 +20,7 @@
 
     <div class="container-fluid">
         <div class="table-responsive">
-            <table id="example" class="table table-lg table-striped table-bordered" style="width:100%">
+            <table class="table table-lg table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
                         <th>No.</th>

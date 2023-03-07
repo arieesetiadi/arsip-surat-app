@@ -14,13 +14,13 @@ class JenisPenggunaSeeder extends Seeder
      */
     public function run()
     {
-        $jenis_pengguna = [
+        $jenisPengguna = [
             ['nama' => 'Admin Officer'],
             ['nama' => 'Direktur BUMDes']
         ];
         
         $tJenisPengguna = new T_JenisPengguna();
         $tJenisPengguna->truncate();
-        $tJenisPengguna->insert($jenis_pengguna);
+        $tJenisPengguna->insert($jenisPengguna);
     }
 }

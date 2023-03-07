@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\SuratMasuk;
 
+use App\Models\T_SuratMasuk;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequest
@@ -62,7 +63,7 @@ class StoreRequest extends FormRequest
     {
         $data = [
             'id_pengguna' => pengguna()->id_pengguna,
-            'nomor_urut' => generateNomorUrut(),
+            'nomor_urut' => T_SuratMasuk::getNomorUrut(),
             'nomor_surat_asal' => $this->nomor_surat_asal,
             'tanggal_surat_asal' => $this->tanggal_surat_asal,
             'pengirim' => $this->pengirim,

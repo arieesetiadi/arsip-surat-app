@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
 
     // Route untuk Logout
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
     
     // Route untuk kelola Pengguna
     Route::get('/profile', [PenggunaController::class, 'profileView'])->name('profile.view');
@@ -32,14 +31,10 @@ Route::middleware('auth')->group(function () {
     Route::resource('/pengguna', PenggunaController::class);
 
     // Route surat masuk
-    Route::controller(SuratMasukController::class)->group(function () {
-        Route::resource('/surat-masuk', SuratMasukController::class);
-    });
+    Route::resource('/surat-masuk', SuratMasukController::class);
 
     // Route surat keluar
-    Route::controller(SuratKeluarController::class)->group(function () {
-        Route::resource('/surat-keluar', SuratKeluarController::class);
-    });
+    Route::resource('/surat-keluar', SuratKeluarController::class);
 });
 
 

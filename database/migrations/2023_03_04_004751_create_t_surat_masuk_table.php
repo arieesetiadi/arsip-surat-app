@@ -16,7 +16,7 @@ class CreateTSuratMasukTable extends Migration
         Schema::create('t_surat_masuk', function (Blueprint $table) {
             $table->integer('id_surat_masuk')->autoIncrement()->unique();
             $table->integer('id_pengguna');
-            $table->integer('nomor_urut')->nullable();
+            $table->string('nomor_urut')->nullable();
             $table->string('nomor_surat_asal')->nullable();
             $table->string('pengirim')->nullable();
             $table->string('penerima')->nullable();

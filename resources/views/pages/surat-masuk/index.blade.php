@@ -20,19 +20,40 @@
 
     <div class="container-fluid">
         <div class="table-responsive">
-            <table id="example" class="table table-lg table-striped table-bordered" style="width:100%">
+            <table class="table table-lg table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Username</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Telepon</th>
+                        <th>Nomor</th>
+                        <th>Nomor Surat Asal</th>
+                        <th>Tanggal Diterima</th>
+                        <th>Pengirim</th>
+                        <th>Perihal</th>
                         <th>Pilihan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{--  --}}
+                    @foreach ($suratMasuk as $sm)
+                        <tr>
+                            <td>{{ $sm->nomor_urut }}</td>
+                            <td>{{ $sm->nomor_surat_asal }}</td>
+                            <td>{{ humanDateFormat($sm->tanggal_diterima) }}</td>
+                            <td>{{ $sm->pengirim }}</td>
+                            <td>{{ $sm->perihal }}</td>
+                            <td>
+                                {{-- Tombol detail --}}
+                                <a href="{{ route('surat-masuk.show', $sm->id_surat_masuk) }}" title="Detail Surat" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    class="btn btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                                {{-- Tombol cetak --}}
+                                <a href="#" title="Cetak Surat" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    class="btn btn-sm">
+                                    <i class="bi bi-printer"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
