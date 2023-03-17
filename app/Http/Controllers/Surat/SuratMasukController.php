@@ -6,10 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\FileController;
 use App\Http\Requests\SuratMasuk\StoreRequest;
 use App\Http\Requests\SuratMasuk\UpdateRequest;
-use App\Models\Surat\SuratMasuk;
 use App\Models\T_Lampiran;
 use App\Models\T_SuratMasuk;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SuratMasukController extends Controller
@@ -28,7 +26,7 @@ class SuratMasukController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
+    *
      * @return \Illuminate\Http\Response
      */
     public function create()

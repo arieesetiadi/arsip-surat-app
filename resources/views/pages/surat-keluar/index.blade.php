@@ -11,7 +11,7 @@
         </div>
 
         {{-- Tombol tambah surat keluar --}}
-        <a href="{{ route('pengguna.create') }}" title="Tambah Surat Keluar" data-bs-toggle="tooltip" data-bs-placement="left"
+        <a href="{{ route('surat-keluar.create') }}" title="Tambah Surat Keluar" data-bs-toggle="tooltip" data-bs-placement="left"
             class="btn btn-primary">
             <i class="bi bi-plus-circle"></i>
             Tambah Surat Keluar

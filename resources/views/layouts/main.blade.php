@@ -14,6 +14,11 @@
 
     {{-- Page title --}}
     <title>{{ $title ?? 'App' }} | BUMDes Sari Amreta Sudha</title>
+    <style>
+        .test{
+            color: white;
+        }
+    </style>
 </head>
 
 <body>

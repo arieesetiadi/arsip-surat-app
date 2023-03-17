@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class T_SuratMasuk extends Model
+class T_SuratKeluar extends Model
 {
     use HasFactory;
 
-    protected $table = 't_surat_masuk';
-    protected $primaryKey = 'id_surat_masuk';
+    protected $table = 't_surat_keluar';
+    protected $primaryKey = 'id_surat_keluar';
     protected $guarded = [];
 
     public $timestamps = false;
@@ -23,14 +23,18 @@ class T_SuratMasuk extends Model
 
     public function lampiran()
     {
-        return $this->hasMany(T_Lampiran::class, 'id_surat', 'id_surat_masuk')->where('jenis', 'Surat Masuk');
+        return $this
+            ->hasMany(T_Lampiran::class, 'id_surat', 'id_surat_keluar')
+            ->where('jenis', 'Surat Keluar');
     }
 
     // Methods
     public static function getAll()
     {
-        $result = self::with(['pengguna', 'lampiran'])
-            ->orderByDesc('id_surat_masuk')->get();
+        $result = self
+            ::with(['pengguna', 'lampiran'])
+            ->orderByDesc('id_surat_keluar')
+            ->get();
 
         return $result;
     }

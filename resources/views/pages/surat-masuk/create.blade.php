@@ -78,22 +78,6 @@
                             @enderror
                         </div>
 
-                        {{-- Penerima --}}
-                        {{-- <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="penerima" class="form-label">Penerima :</label>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-person"></i>
-                                </div>
-                                <input name="penerima" type="text" class="form-control ps-5" id="penerima"
-                                    placeholder="Masukan penerima" autocomplete="off" value="{{ old('penerima', pengguna()->nama) }}"
-                                    required disabled aria-disabled="true">
-                            </div>
-                            @error('penerima')
-                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
-                            @enderror
-                        </div> --}}
-
                         {{-- Perihal --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <label for="perihal" class="form-label">Perihal :</label>
@@ -172,8 +156,4 @@
             </div>
         </div>
     </div>
-
-    @push('afterScripts')
-        <script src="{{ asset('assets/js/toggle.password.js') }}"></script>
-    @endpush
 @endsection
