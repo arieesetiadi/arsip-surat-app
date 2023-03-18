@@ -51,8 +51,20 @@
                             </div>
                         </div>
 
-                          {{-- Pengirim --}}
-                          <div class="col-sm-12 col-md-12 col-lg-6">
+                        {{-- Tanggal Dikirim --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="tanggal_dikirim" class="form-label">Tanggal Dikirim :</label>
+                            <div class="ms-auto position-relative">
+                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
+                                    <i class="bi bi-calendar"></i>
+                                </div>
+                                <input type="date" class="form-control ps-5"
+                                    value="{{ formDateFormat($suratKeluar->tanggal_dikirim) }}" disabled>
+                            </div>
+                        </div>
+
+                        {{-- Pengirim --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
                             <label for="pengirim" class="form-label">Pengirim :</label>
                             <div class="ms-auto position-relative">
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
@@ -82,7 +94,8 @@
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-bookmark"></i>
                                 </div>
-                                <input type="text" class="form-control ps-5" value="{{ $suratKeluar->perihal }}" disabled>
+                                <input type="text" class="form-control ps-5" value="{{ $suratKeluar->perihal }}"
+                                    disabled>
                             </div>
                         </div>
 
@@ -100,18 +113,6 @@
                             <select class="form-select" aria-label="bagian" disabled>
                                 <option selected>{{ $suratKeluar->bagian }}</option>
                             </select>
-                        </div>
-
-                        {{-- Tanggal Dikirim --}}
-                        <div class="col-sm-12 col-md-12 col-lg-6">
-                            <label for="tanggal_dikirim" class="form-label">Tanggal Dikirim :</label>
-                            <div class="ms-auto position-relative">
-                                <div class="position-absolute top-50 translate-middle-y search-icon px-3">
-                                    <i class="bi bi-calendar"></i>
-                                </div>
-                                <input type="date" class="form-control ps-5"
-                                    value="{{ formDateFormat($suratKeluar->tanggal_dikirim) }}" disabled>
-                            </div>
                         </div>
 
                         <hr>
