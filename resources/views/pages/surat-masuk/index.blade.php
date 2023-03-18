@@ -23,7 +23,7 @@
             <table class="table table-lg table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>Nomor</th>
+                        <th>#</th>
                         <th>Nomor Surat Asal</th>
                         <th>Tanggal Diterima</th>
                         <th>Pengirim</th>
@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($suratMasuk as $sm)
+                    @forelse ($suratMasuk as $sm)
                         <tr>
                             <td>{{ $sm->nomor_urut }}</td>
                             <td>{{ $sm->nomor_surat_asal }}</td>
@@ -41,8 +41,8 @@
                             <td>{{ $sm->perihal }}</td>
                             <td>
                                 {{-- Tombol detail --}}
-                                <a href="{{ route('surat-masuk.show', $sm->id_surat_masuk) }}" title="Detail Surat" data-bs-toggle="tooltip" data-bs-placement="right"
-                                    class="btn btn-sm">
+                                <a href="{{ route('surat-masuk.show', $sm->id_surat_masuk) }}" title="Detail Surat"
+                                    data-bs-toggle="tooltip" data-bs-placement="right" class="btn btn-sm">
                                     <i class="bi bi-eye"></i>
                                 </a>
 
@@ -53,7 +53,13 @@
                                 </a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="6" class="pt-3">
+                                <h6 class="text-center">Data surat masuk tidak tersedia.</h6>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

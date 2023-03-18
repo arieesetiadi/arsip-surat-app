@@ -11,8 +11,8 @@
         </div>
 
         {{-- Tombol tambah surat keluar --}}
-        <a href="{{ route('surat-keluar.create') }}" title="Tambah Surat Keluar" data-bs-toggle="tooltip" data-bs-placement="left"
-            class="btn btn-primary">
+        <a href="{{ route('surat-keluar.create') }}" title="Tambah Surat Keluar" data-bs-toggle="tooltip"
+            data-bs-placement="left" class="btn btn-primary">
             <i class="bi bi-plus-circle"></i>
             Tambah Surat Keluar
         </a>
@@ -23,16 +23,47 @@
             <table class="table table-lg table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>No.</th>
-                        <th>Username</th>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Telepon</th>
+                        <th>#</th>
+                        <th>Nomor Surat</th>
+                        <th>Tanggal Surat</th>
+                        <th>Penerima</th>
+                        <th>Bagian</th>
+                        <th>Pelaksana</th>
+                        <th>Perihal</th>
                         <th>Pilihan</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{--  --}}
+                    @forelse ($suratKeluar as $sk)
+                        <tr>
+                            <td>{{ $sk->nomor_urut }}</td>
+                            <td>{{ $sk->nomor_surat }}</td>
+                            <td>{{ humanDateFormat($sk->tanggal_surat) }}</td>
+                            <td>{{ $sk->penerima }}</td>
+                            <td>{{ $sk->bagian }}</td>
+                            <td>{{ $sk->pelaksana }}</td>
+                            <td>{{ $sk->perihal }}</td>
+                            <td>
+                                {{-- Tombol detail --}}
+                                <a href="{{ route('surat-keluar.show', $sk->id_surat_keluar) }}" title="Detail Surat"
+                                    data-bs-toggle="tooltip" data-bs-placement="right" class="btn btn-sm">
+                                    <i class="bi bi-eye"></i>
+                                </a>
+
+                                {{-- Tombol cetak --}}
+                                <a href="#" title="Cetak Surat" data-bs-toggle="tooltip" data-bs-placement="right"
+                                    class="btn btn-sm">
+                                    <i class="bi bi-printer"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="6" class="pt-3">
+                                <h6 class="text-center">Data surat keluar tidak tersedia.</h6>
+                            </td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

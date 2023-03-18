@@ -23,7 +23,7 @@
             <table class="table table-lg table-striped table-bordered" style="width:100%">
                 <thead>
                     <tr>
-                        <th>No.</th>
+                        <th>#</th>
                         <th>Jenis Pengguna</th>
                         <th>Username</th>
                         <th>Nama</th>

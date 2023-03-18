@@ -3,8 +3,7 @@
 @section('content')
     <h2 class="mb-4">
         {{-- Tombol kembali --}}
-        <a href="{{ url()->previous() }}" title="Kembali" data-bs-toggle="tooltip" data-bs-placement="left"
-           class="text-dark">
+        <a href="{{ url()->previous() }}" title="Kembali" data-bs-toggle="tooltip" data-bs-placement="left" class="text-dark">
             <i class="bi bi-caret-left"></i>
         </a>
         TAMBAH SURAT KELUAR
@@ -14,7 +13,7 @@
         <div class="row">
             <div class="col-12">
                 <form action="{{ route('surat-keluar.store') }}" method="POST" class="form-body"
-                      enctype="multipart/form-data">
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="row g-3 py-4">
                         {{-- Input nomor surat --}}
@@ -24,12 +23,11 @@
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-list"></i>
                                 </div>
-                                <input name="nomor_surat" type="text" class="form-control ps-5"
-                                       id="nomor_surat" placeholder="Nomor surat" autocomplete="off"
-                                       value="{{ old('nomor_surat') }}" required>
+                                <input name="nomor_surat" type="text" class="form-control ps-5" id="nomor_surat"
+                                    placeholder="Nomor surat" autocomplete="off" value="{{ old('nomor_surat') }}" required>
                             </div>
                             @error('nomor_surat')
-                            <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
@@ -40,13 +38,11 @@
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-calendar"></i>
                                 </div>
-                                <input name="tanggal_surat" type="date" class="form-control ps-5"
-                                       id="tanggal_surat" autocomplete="off"
-                                       value="{{ old('tanggal_surat', now()->toDateString()) }}"
-                                       required>
+                                <input name="tanggal_surat" type="date" class="form-control ps-5" id="tanggal_surat"
+                                    autocomplete="off" value="{{ old('tanggal_surat', now()->toDateString()) }}" required>
                             </div>
                             @error('tanggal_surat')
-                            <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
@@ -58,11 +54,11 @@
                                     <i class="bi bi-person"></i>
                                 </div>
                                 <input name="penerima" type="text" class="form-control ps-5" id="penerima"
-                                       placeholder="Masukan penerima" autocomplete="off" value="{{ old('penerima') }}"
-                                       required>
+                                    placeholder="Masukan penerima" autocomplete="off" value="{{ old('penerima') }}"
+                                    required>
                             </div>
                             @error('penerima')
-                            <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
@@ -73,12 +69,11 @@
                                 <div class="position-absolute top-50 translate-middle-y search-icon px-3">
                                     <i class="bi bi-calendar"></i>
                                 </div>
-                                <input name="tanggal_dikirim" type="date" class="form-control ps-5"
-                                       id="tanggal_dikirim" autocomplete="off"
-                                       value="{{ old('tanggal_dikirim', now()->toDateString()) }}" required>
+                                <input name="tanggal_dikirim" type="date" class="form-control ps-5" id="tanggal_dikirim"
+                                    autocomplete="off" value="{{ old('tanggal_dikirim', now()->toDateString()) }}" required>
                             </div>
                             @error('tanggal_dikirim')
-                            <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
@@ -90,16 +85,15 @@
                                     <i class="bi bi-bookmark"></i>
                                 </div>
                                 <input name="perihal" type="text" class="form-control ps-5" id="perihal"
-                                       placeholder="Masukan perihal" autocomplete="off" value="{{ old('perihal') }}"
-                                       required>
+                                    placeholder="Masukan perihal" autocomplete="off" value="{{ old('perihal') }}" required>
                             </div>
                             @error('perihal')
-                            <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
                         {{-- Input Pelaksana --}}
-                        <div class="col-sm-12 col-md-12 col-lg-3">
+                        <div class="col-sm-12 col-md-12 col-lg-6">
                             <label for="pelaksana" class="form-label">Pelaksana :</label>
                             <select name="pelaksana" id="pelaksana" class="form-select" aria-label="pelaksana">
                                 @if (old('pelaksana') == 'BUMDesa Sari Amreta Sudha Sidakarya')
@@ -114,14 +108,33 @@
                                 @endif
                             </select>
                             @error('pelaksana')
-                            <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
                             @enderror
                         </div>
 
-
+                        {{-- Unggah lampiran --}}
                         <div class="col-sm-12 col-md-12 col-lg-6">
                             <label for="lampiran" class="form-label">Unggah Lampiran :</label>
                             <input name="lampiran[]" class="form-control" type="file" id="lampiran" multiple>
+                        </div>
+
+                        {{-- Input Bagian --}}
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <label for="bagian" class="form-label">Bagian :</label>
+                            <select name="bagian" id="bagian" class="form-select" aria-label="bagian">
+                                @foreach ($bagian as $b)
+                                    @if (old('bagian'))
+                                        <option value="{{ $b }}" {{ old('bagian') == $b ? 'selected' : '' }}>
+                                            {{ $b }}</option>
+                                    @else
+                                        <option selected hidden>Pilih bagian</option>
+                                        <option value="{{ $b }}">{{ $b }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error('bagian')
+                                <small class="text-danger d-inline-block mt-2">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     {{--                    --}}

@@ -60,9 +60,9 @@ class SuratKeluarController extends Controller
         // DB Transaction
         DB::beginTransaction();
 
-        // Insert surat masuk
-        $suratMasukData = $request->data();
-        $suratMasuk = T_SuratMasuk::create($suratMasukData);
+        // Insert surat keluar
+        $suratKeluarData = $request->data();
+        $suratKeluar = T_SuratKeluar::create($suratKeluarData);
 
         // Upload lampiran
         foreach ($request->lampiran as $lampiran) {
@@ -70,9 +70,9 @@ class SuratKeluarController extends Controller
             $fileName = FileController::upload($lampiran, $path);
 
             $lampiranData = [
-                'id_surat' => $suratMasuk->id_surat_masuk,
+                'id_surat' => $suratKeluar->id_surat_keluar,
                 'nama' => $fileName,
-                'jenis' => 'Surat Masuk',
+                'jenis' => 'Surat Keluar',
             ];
 
             T_Lampiran::create($lampiranData);
@@ -83,8 +83,8 @@ class SuratKeluarController extends Controller
 
         // Munculkan pesan succes jika insert berhasil
         $alert['type'] = 'success';
-        $alert['message'] = 'Data surat masuk berhasil ditambah.';
-        return redirect()->route('surat-masuk.index')->with('alert', $alert);
+        $alert['message'] = 'Data surat keluar berhasil ditambah.';
+        return redirect()->route('surat-keluar.index')->with('alert', $alert);
     }
 
     /**

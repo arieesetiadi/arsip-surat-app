@@ -22,7 +22,6 @@ class CreateTSuratKeluarTable extends Migration
             $table->string('penerima')->nullable();
             $table->string('perihal')->nullable();
             $table->string('bagian')->nullable(); // Discuss string | foreignId ?
-            $table->string('peringatan')->nullable();
             $table->dateTime('tanggal_surat')->nullable();
             $table->dateTime('tanggal_dikirim')->nullable();
         });
